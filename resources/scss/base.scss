@@ -1,3 +1,17 @@
+@use "@scss/variables/colors";
+@use "@scss/mixins/mixins";
+@use "@scss/fonts/mulish";
+@use "normalize.css";
+
 body {
-    background-color: #1e1f22;
+    background-color: colors.$bg-base;
+}
+
+h1, h2, h3, h4, h5, h6, span, a, p, input {
+    font-family: "Mulish", sans-serif;
+    color: colors.$text-primary;
+}
+
+.selector {
+    @include mixins.selector
 }

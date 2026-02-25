@@ -1,0 +1,33 @@
+@use "@scss/mixins/font";
+
+$font-path: "/fonts/Mulish";
+
+$weights: (
+    200: "ExtraLight",
+    300: "Light",
+    400: "Regular",
+    500: "Medium",
+    600: "SemiBold",
+    700: "Bold",
+    800: "ExtraBold",
+    900: "Black"
+);
+
+$italic-names: (
+    200: "ExtraLightItalic",
+    300: "LightItalic",
+    400: "Italic",
+    500: "MediumItalic",
+    600: "SemiBoldItalic",
+    700: "BoldItalic",
+    800: "ExtraBoldItalic",
+    900: "BlackItalic"
+);
+
+@each $weight, $name in $weights {
+    @include font.font-face("Mulish-", "#{$font-path}/Mulish-#{$name}", $weight);
+}
+
+@each $weight, $name in $italic-names {
+    @include font.font-face("Mulish-", "#{$font-path}/Mulish-#{$name}", $weight, italic);
+}

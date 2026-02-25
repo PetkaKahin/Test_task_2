@@ -1,0 +1,7 @@
+@use "@scss/variables/colors";
+
+@mixin selector() {
+    border-radius: 12px;
+    background-color: colors.$bg-base;
+    box-shadow: 0 2px 1px 0 #00000005;
+}
