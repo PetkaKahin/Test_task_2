@@ -15,7 +15,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request) {
         if (Auth::attempt($request->only('name', 'password'))) {
             $request->session()->regenerate();
-            return redirect()->intended(route('feedbacks.show'));
+            return redirect()->intended(route('reviews.show'));
         }
 
         return back()->withErrors([

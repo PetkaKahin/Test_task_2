@@ -3,11 +3,11 @@ import BaseLayout from "@/Layouts/BaseLayout.vue";
 import LocationIco from "@/UI/Icons/LocationIco.vue";
 import {useAsideMenu} from "@/composables/useAsideMenu.ts";
 import {onMounted} from "vue";
-import AllFeedbacksCard from "@/UI/Cards/AllFeedbacksCard.vue";
-import FeedbackCard from "@/UI/Cards/FeedbackCard.vue";
+import AllReviewsCard from "@/UI/Cards/AllReviewsCard.vue";
+import ReviewCard from "@/UI/Cards/ReviewCard.vue";
 
 onMounted(() => {
-    useAsideMenu().setActiveItem('feedback')
+    useAsideMenu().setActiveItem('reviews')
 })
 </script>
 
@@ -20,13 +20,13 @@ onMounted(() => {
             </header>
 
             <main class="content">
-                <FeedbackCard
+                <ReviewCard
                     data="12.09.2022 14:22"
                     username="Наталья"
                     phone="+7 900 540 40 40"
                     firm="Филиал 1"
-                    :feedbackNumber="5"
-                    feedbackText="Так, с чего начать... Разнообразная алкогольная продукция, множество закусок и обычных блюд. Кухня вкусная и
+                    :reviewNumber="5"
+                    reviewText="Так, с чего начать... Разнообразная алкогольная продукция, множество закусок и обычных блюд. Кухня вкусная и
 Разнообразная, от супа и салатов до мясных продуктов. Персонал молодые девушки, общительная и доброжелательные,
 всегда подскажут, вовремя принесут и вызовут такси. Отдыхали на летней веранде, свежо и тепло, в общем самое то в
 жаркую погоду. Сами залы не сильно рассмотрел, но видел что они удобные и просторные. "
@@ -34,7 +34,7 @@ onMounted(() => {
             </main>
 
             <aside class="menu">
-                <AllFeedbacksCard :avg-feedback="4.7" :feedbackCount="1145"/>
+                <AllReviewsCard :avg-review="4.7" :reviewCount="1145"/>
             </aside>
         </section>
     </BaseLayout>

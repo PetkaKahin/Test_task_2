@@ -3,9 +3,9 @@ import {route} from "ziggy-js";
 
 const items = ref<IItem[]>([
     {
-        key: 'feedback',
+        key: 'reviews',
         text: "Отзывы",
-        url: route('feedbacks.show'),
+        url: route('reviews.show'),
         isActive: false,
     },
     {

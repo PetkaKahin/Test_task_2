@@ -9,8 +9,8 @@ interface IProps {
     username: string,
     phone: string,
     firm: string,
-    feedbackText: string,
-    feedbackNumber: number,
+    reviewText: string,
+    reviewNumber: number,
 }
 
 const props = defineProps<IProps>()
@@ -18,7 +18,7 @@ const props = defineProps<IProps>()
 
 <template>
     <BaseCard>
-        <article class="feedback-card">
+        <article class="review-card">
             <header class="header">
                 <div class="left-block">
                     <h3 class="header__text">{{props.data}}</h3>
@@ -28,7 +28,7 @@ const props = defineProps<IProps>()
                     <LocationIco/>
                 </div>
                 <div class="right-block">
-                    <StarLine :feedback="props.feedbackNumber" :sizeStar="14" :gap="9"/>
+                    <StarLine :review="props.reviewNumber" :sizeStar="14" :gap="9"/>
                 </div>
             </header>
 
@@ -37,7 +37,7 @@ const props = defineProps<IProps>()
                     <h3 class="contacts__username">{{ props.username }}</h3>
                     <h3 class="contacts__phone">{{props.phone}}</h3>
                 </div>
-                <p class="body__text">{{props.feedbackText}}</p>
+                <p class="body__text">{{ props.reviewText }}</p>
             </div>
         </article>
     </BaseCard>
@@ -46,7 +46,7 @@ const props = defineProps<IProps>()
 <style scoped lang="scss">
 @use "@scss/variables/colors";
 
-.feedback-card {
+.review-card {
     background-color: colors.$bg-elevated;
     border-radius: 12px;
     margin: 13px 0 13px 15px;

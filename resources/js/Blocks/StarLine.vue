@@ -4,7 +4,7 @@ import VoidStarIco from "@/UI/Icons/VoidStarIco.vue";
 import StarIco from "@/UI/Icons/StarIco.vue";
 
 interface IProps {
-    feedback: number
+    review: number
     sizeStar?: number
     gap?: number
 }
@@ -20,7 +20,7 @@ const props = defineProps<IProps>()
             class="star-line__item"
             :style="{ gap: props.gap || '9px' }"
         >
-            <StarIco v-if="props.feedback >= i" :size="props.sizeStar"/>
+            <StarIco v-if="props.review >= i" :size="props.sizeStar"/>
             <VoidStarIco v-else :size="props.sizeStar"/>
         </div>
     </article>

@@ -1,13 +1,11 @@
 <script setup lang="ts">
 
 import BaseCard from "@/UI/Cards/BaseCard.vue";
-import VoidStarIco from "@/UI/Icons/VoidStarIco.vue";
-import StarIco from "@/UI/Icons/StarIco.vue";
 import StarLine from "@/Blocks/StarLine.vue";
 
 interface IProps {
-    avgFeedback: number,
-    feedbackCount: number,
+    avgReview: number,
+    reviewCount: number,
 }
 
 const props = defineProps<IProps>()
@@ -15,15 +13,15 @@ const props = defineProps<IProps>()
 
 <template>
     <BaseCard>
-        <div class="all-feedbacks-card">
+        <div class="all-review-card">
             <header class="header">
-                <span class="header__text">{{props.avgFeedback}}</span>
+                <span class="header__text">{{ props.avgReview }}</span>
 
-                <StarLine :feedback="4.7"/>
+                <StarLine :review="4.7"/>
             </header>
 
             <div class="body">
-                <span class="body__text">Всего отзывов: {{feedbackCount}}</span>
+                <span class="body__text">Всего отзывов: {{ reviewCount }}</span>
             </div>
         </div>
     </BaseCard>
@@ -32,7 +30,7 @@ const props = defineProps<IProps>()
 <style scoped lang="scss">
 @use "@scss/variables/colors";
 
-.all-feedbacks-card {
+.all-review-card {
     padding: 18px 16px;
 }
 
