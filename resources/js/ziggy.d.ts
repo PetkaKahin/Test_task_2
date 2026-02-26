@@ -2,9 +2,11 @@
 declare module 'ziggy-js' {
   interface RouteList {
     "sanctum.csrf-cookie": [],
+    "yandex_reviews.index": [],
     "login.show": [],
     "login": [],
     "settings.show": [],
+    "settings.update": [],
     "reviews.show": [],
     "logout": [],
     "storage.local": [

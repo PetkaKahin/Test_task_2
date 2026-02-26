@@ -72,9 +72,5 @@ function submit() {
 .errors {
     display: flex;
     flex-direction: column;
-
-    .error {
-        color: #cf2c2c;
-    }
 }
 </style>
