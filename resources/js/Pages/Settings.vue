@@ -7,6 +7,12 @@ import {useAsideMenu} from "@/composables/useAsideMenu.ts";
 onMounted(() => {
     useAsideMenu().setActiveItem('settings')
 })
+
+interface IProps {
+    url?: string;
+}
+
+const props = defineProps<IProps>()
 </script>
 
 <template>
@@ -16,7 +22,7 @@ onMounted(() => {
                 <h2 class="header__text">Подключить Яндекс</h2>
             </header>
 
-            <SetLinkFrom/>
+            <SetLinkFrom :defaultUrl="props.url" />
         </section>
     </BaseLayout>
 </template>

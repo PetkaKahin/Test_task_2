@@ -2,16 +2,35 @@
 
 import BaseInput from "@/UI/Inputs/BaseInput.vue";
 import PrimaryButton from "@/UI/Buttons/PrimaryButton.vue";
+import {useForm} from "@inertiajs/vue3";
+import {route} from "ziggy-js";
+
+interface IProps {
+    defaultUrl?: string
+}
+
+const props = defineProps<IProps>()
+
+const form = useForm({
+    url_organization: props.defaultUrl,
+})
+
+function submit() {
+    form.patch(route('settings.update'))
+}
 </script>
 
 <template>
-<form class="form">
+<form class="form" @submit.prevent="submit">
     <div class="form__title">
         <span class="form__text">Укажите ссылку на Яндекс, пример</span>
         <span class="form__text form__link">https://yandex.ru/maps/org/samoye_populyarnoye_kafe/1010501395/reviews/</span>
     </div>
 
-    <BaseInput type="text" id="url" name="url"/>
+    <BaseInput v-model="form.url_organization" type="text" id="url" name="url"/>
+
+    <span class="error" v-if="form.errors.url_organization">Неправильный формат ссылки</span>
+
     <PrimaryButton class="submit" type="submit" text="Сохранить"/>
 </form>
 </template>
