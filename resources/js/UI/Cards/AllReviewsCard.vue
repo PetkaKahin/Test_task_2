@@ -17,7 +17,7 @@ const props = defineProps<IProps>()
             <header class="header">
                 <span class="header__text">{{ props.avgReview }}</span>
 
-                <StarLine :review="4.7"/>
+                <StarLine :review="props.avgReview"/>
             </header>
 
             <div class="body">
