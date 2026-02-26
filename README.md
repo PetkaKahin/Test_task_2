@@ -73,6 +73,11 @@ password: 12345
 ```
 ---
 
+## Build
+```bash
+docker compose run --rm --service-ports npm run build
+```
+
 ## Запуск Vite dev сервера
 ```bash
 docker compose run --rm --service-ports npm run dev
