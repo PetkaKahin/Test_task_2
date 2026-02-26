@@ -23,7 +23,7 @@
 ### 1. Клонирование и настройка
 ```bash
 git clone https://github.com/PetkaKahin/Laravel_docker.git
-cd Laravel_docker
+cd Test_task_2
 cp .env.example .env
 ```
 
