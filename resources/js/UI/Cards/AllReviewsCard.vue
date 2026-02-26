@@ -32,6 +32,7 @@ const props = defineProps<IProps>()
 
 .all-review-card {
     padding: 18px 16px;
+    width: fit-content;
 }
 
 .header {

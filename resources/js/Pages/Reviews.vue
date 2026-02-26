@@ -5,9 +5,34 @@ import {useAsideMenu} from "@/composables/useAsideMenu.ts";
 import {onMounted} from "vue";
 import AllReviewsCard from "@/UI/Cards/AllReviewsCard.vue";
 import ReviewCard from "@/UI/Cards/ReviewCard.vue";
+import BasePagination from "@/UI/Paginations/BasePagination.vue";
+import {useYandexReviews} from "@/composables/useYandexReviews.ts";
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
+const {
+    reviews,
+    countReviews,
+    rating,
+    name,
+    currentPage,
+    totalPages,
+    isLoading,
+    fetchReviews,
+    goToPage,
+} = useYandexReviews()
+
+const formatDate = (iso: string) => {
+    return dayjs(iso).tz('Europe/Moscow').format('DD.MM.YYYY HH:mm')
+}
 
 onMounted(() => {
     useAsideMenu().setActiveItem('reviews')
+    fetchReviews()
 })
 </script>
 
@@ -20,21 +45,37 @@ onMounted(() => {
             </header>
 
             <main class="content">
-                <ReviewCard
-                    data="12.09.2022 14:22"
-                    username="Наталья"
-                    phone="+7 900 540 40 40"
-                    firm="Филиал 1"
-                    :reviewNumber="5"
-                    reviewText="Так, с чего начать... Разнообразная алкогольная продукция, множество закусок и обычных блюд. Кухня вкусная и
-Разнообразная, от супа и салатов до мясных продуктов. Персонал молодые девушки, общительная и доброжелательные,
-всегда подскажут, вовремя принесут и вызовут такси. Отдыхали на летней веранде, свежо и тепло, в общем самое то в
-жаркую погоду. Сами залы не сильно рассмотрел, но видел что они удобные и просторные. "
-                />
+                <div class="none-review" v-if="isLoading">
+                    <h1>Загружаем отзывы...</h1>
+                </div>
+
+                <template v-else>
+                    <div class="none-review" v-if="countReviews == 0">
+                        <h1>Не удалось загрузить отзывы :(</h1>
+                    </div>
+
+                    <ReviewCard
+                        class="content__card"
+                        v-for="(review, i) in reviews"
+                        :key="i"
+                        :data="formatDate(review.updatedTime)"
+                        :username="review.author?.name ?? 'Аноним'"
+                        :phone="review.author?.professionLevel ?? 'нет данных'"
+                        :firm="name"
+                        :reviewNumber="review.rating"
+                        :reviewText="review.text"
+                    />
+
+                    <BasePagination
+                        :current-page="currentPage"
+                        :total-pages="totalPages"
+                        @change="goToPage"
+                    />
+                </template>
             </main>
 
             <aside class="menu">
-                <AllReviewsCard :avg-review="4.7" :reviewCount="1145"/>
+                <AllReviewsCard :avg-review="rating" :reviewCount="countReviews"/>
             </aside>
         </section>
     </BaseLayout>
@@ -45,7 +86,7 @@ onMounted(() => {
 
 .page {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr auto;
     grid-template-rows: auto auto;
     grid-template-areas:
     "header header"
@@ -79,6 +120,14 @@ onMounted(() => {
 
 .content {
     grid-area: content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+
+    &__card {
+        width: 100%;
+    }
 }
 
 .aside {
