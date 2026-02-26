@@ -7,9 +7,8 @@ use DOMXPath;
 use GuzzleHttp\Cookie\CookieJar;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
-class YandexReviewsService
+class YandexMapService
 {
     public function getReviews(string $organizationId, int $pageNumber, int $pageSize, int $cacheTime): array
     {
@@ -63,15 +62,6 @@ class YandexReviewsService
                 'rating' => $rating,
             ];
         });
-    }
-
-    public function extractOrganizationId(string $url): ?string
-    {
-        if (preg_match('/\/org\/[^\/]+\/(\d+)/', $url, $m)) {
-            return $m[1];
-        }
-
-        return null;
     }
 
     private function fetchReviews(
@@ -181,8 +171,9 @@ class YandexReviewsService
     private function hashFunction(string $e): int
     {
         $n = 5381;
+        $length = strlen($e);
 
-        for ($r = 0; $r < strlen($e); $r++) {
+        for ($r = 0; $r < $length; $r++) {
             $n = $this->toInt32(33 * $n) ^ ord($e[$r]);
         }
 
