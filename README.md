@@ -1,6 +1,6 @@
-# Laravel Docker Project
+# Тестовое задание
 
-Laravel приложение с Vue.js 3, Inertia.js, TypeScript, Pinia, PostgreSQL и Vite на Docker.
+Приложение запоминает ссылку на компанию в яндекс картах и выводит отзывы
 
 ## Стек
 
@@ -9,7 +9,7 @@ Laravel приложение с Vue.js 3, Inertia.js, TypeScript, Pinia, Postgre
 - **PostgreSQL 18**
 - **Node.js** + npm
 - **Laravel 12** + Inertia.js
-- **Vue 3** + TypeScript + Pinia
+- **Vue 3** + TypeScript
 - **Axios** для HTTP-запросов
 - **SCSS** для стилей
 
@@ -60,18 +60,25 @@ docker compose exec php composer install
 docker compose exec php php artisan key:generate
 
 # Миграции
-docker compose exec php php artisan migrate
+docker compose exec php php artisan migrate --seed
 
 # Node зависимости
 docker compose run --rm npm install
 ```
 
-### 5. Запуск Vite dev сервера
+### 5. Данные для входа:
+```
+loin: admin
+password: 12345
+```
+---
+
+## Запуск Vite dev сервера
 ```bash
 docker compose run --rm --service-ports npm run dev
 ```
 
-### 6. Открыть в браузере
+### Открыть в браузере
 
 - **Приложение:** http://localhost:8080
 - **Vite HMR:** http://localhost:5173
@@ -92,36 +99,6 @@ docker compose exec php php artisan tinker
 docker compose exec php php artisan route:list
 docker compose exec php php artisan cache:clear
 docker compose exec php php artisan config:clear
-```
-
-### Composer
-```bash
-docker compose exec php composer <command>
-
-# Примеры
-docker compose exec php composer install
-docker compose exec php composer require laravel/sanctum
-docker compose exec php composer dump-autoload
-```
-
-### npm
-```bash
-docker compose run --rm npm <command>
-
-# Примеры
-docker compose run --rm -p 5173:5173 npm run dev 
-docker compose run --rm npm run build
-```
-
-### База данных
-```bash
-# PostgreSQL CLI
-docker compose exec db psql -U laravel -d laravel
-
-# Полезные psql команды
-\dt          # Список таблиц
-\d users     # Структура таблицы
-\q           # Выход
 ```
 
 ---
